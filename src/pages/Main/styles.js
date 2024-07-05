@@ -1,11 +1,62 @@
 import { keyframes, css } from "styled-components";
 import styled from "styled-components";
 
+export const Head = styled.div`
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: #1a1a1a;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  height: 60px;
+  width: 100%;
+  margin: 0;
+  flex-direction: row;
+
+  h1 {
+    margin-left: 20px;
+    font-size: 25px;
+    color: #bdbdbd;
+  }
+
+  div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 20px;
+    
+  }
+
+  :link {
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 60px;
+    height: 30px;
+    background-color: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bdbdbd;
+    font-weight: bold;
+    margin-left: 15px
+  }
+
+  a {
+    color: #bdbdbd;
+  }
+
+  a:hover {
+    color: #1a1a1a;
+    transition: 0.2s;
+  }
+`;
+
 export const Container = styled.div`
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   background-color: #1a1a1a;
   border-radius: 4px;
-  margin: 80px auto;
+  margin: 80px auto -60px auto;
   max-width: 700px;
   padding: 30px;
 
@@ -85,12 +136,13 @@ export const List = styled.ul`
     flex-direction: row;
     align-items: center;
     font-weight: bold;
-    padding: 15px 0;
+    padding-bottom: 15px;
     color: #bdbdbd;
     display: flex;
 
     & + li {
-      border-top: 1px solid #2a2a2a
+      border-top: 1px solid #2a2a2a;
+      padding: 15px 0;
     }
 
     a {

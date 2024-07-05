@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   body, input, button {
     color: #222222;
     font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
   }
 
   button {

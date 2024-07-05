@@ -1,68 +1,105 @@
-import React, { useState, useCallback } from "react";
-import { Container, Form, SubmitButoon } from "./styles";
-import { FaGithub, FaPlus } from "react-icons/fa";
+import React, { useState, useCallback, useEffect } from "react";
+import { Container, Form, SubmitButton, List, DeleteButton, Icons } from "./styles";
+import { FaBars, FaGithub, FaPlus, FaSpinner, FaTrash } from "react-icons/fa";
 import api from "../../services/api";
 
 function Main() {
   const [newRepositorie, setNewRepositorie] = useState("");
-  const [repos, setRepos] = useState("");
+  const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+  
+  // Utilizando useEffect para buscar e salvar alterações localmente
+  useEffect(() => {
+    const reposStorage = localStorage.getItem('repos');
+    if (reposStorage) {
+      setRepos(JSON.parse(reposStorage));
+    }
+  }, []);
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   const response = await api.get(`repos/${newRepositorie}`);
-    
-  //   console.log(response.data);
-
-  //   const data = {
-  //     name: response.data.full_name,
-  //   }
-
-  //   setRepos([...repos, data]);
-  //   setNewRepositorie("");
-  // }
+  useEffect(() => {
+    localStorage.setItem('repos', JSON.stringify(repos));
+  }, [repos]);
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     
     async function submit() {
-      const response = await api.get(`repos/${newRepositorie}`);
-    
-      console.log(response.data);
+      setLoading(true);
+      setAlert(null);
 
-      const data = {
-        name: response.data.full_name,
+      try {
+        if(newRepositorie === "") {
+          throw new Error("Indique o repositorio desejado");
+        }
+
+        const response = await api.get(`repos/${newRepositorie}`);
+        console.log(response.data);
+        
+        const hasRepo = repos.find(repo => repo.name === newRepositorie);
+
+        if(hasRepo) {
+          throw new Error("Repositorio duplicado");
+        }
+  
+        const data = {
+          name: response.data.full_name,
+        }
+  
+        setRepos([...repos, data]);
+        setNewRepositorie("");
+      } catch(error) {
+        setAlert(true);
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-
-      setRepos([...repos, data]);
-      setNewRepositorie("");
     }
 
     submit();
     
   }, [newRepositorie, repos]);
 
-  function handleInputChange(e) {
+  const handleInputChange = (e) => {
     setNewRepositorie(e.target.value);
+    setAlert(null);
   }
+
+  const handleDelete = useCallback(repoName => {
+    const find = repos.filter(r => r.name !== repoName);
+    setRepos(find);
+  }, [repos]);
 
   return (
     <Container>
       <h1>
         <FaGithub size={25} />
-        Meus Repositorioes
+        Meus Repositorios
       </h1>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} error={alert}>
         <input 
           type="text" 
           placeholder="Adicionar Repositorio"
           value={newRepositorie}
           onChange={handleInputChange}
         />
-        <SubmitButoon>
-          <FaPlus size={14} />
-        </SubmitButoon>
+        <SubmitButton loading={loading ? 1 : 0}>
+          {loading ? (<FaSpinner color="#fff" size={14} />) : (<FaPlus size={14} />)}
+        </SubmitButton>
       </Form>
+      <List>
+        {repos.map(repo => (
+          <li key={repo.name}>
+            <span>{repo.name}</span>
+            <Icons>
+              <a href="/"><FaBars size={20}/></a>
+              <DeleteButton onClick={() => handleDelete(repo.name)}>
+                <FaTrash size={18}/>
+              </DeleteButton>
+            </Icons>
+          </li>
+        ))}
+      </List>
     </Container>
   );
 }

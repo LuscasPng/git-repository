@@ -137,6 +137,7 @@ export const List = styled.ul`
     align-items: center;
     font-weight: bold;
     padding-bottom: 15px;
+    font-size: 16px;
     color: #bdbdbd;
     display: flex;
 

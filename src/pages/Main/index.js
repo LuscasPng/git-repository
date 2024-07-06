@@ -104,7 +104,7 @@ function Main() {
               <li key={repo.name}>
                 <span>{repo.name}</span>
                 <Icons>
-                  <Link to={`/repositorie/${repo.name}`}><FaBars size={20}/></Link>
+                  <Link to={`/repositorie/${encodeURIComponent(repo.name)}`}><FaBars size={20}/></Link>
                   <DeleteButton onClick={() => handleDelete(repo.name)}>
                     <FaTrash size={18}/>
                   </DeleteButton>

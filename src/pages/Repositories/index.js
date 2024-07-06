@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Loading, Container, Owner, BackButton, IssuesList } from "./styles";
 import api from "../../services/api";
 import { FaArrowLeft } from "react-icons/fa";
-import { List } from "../Main/styles";
 
 function Repositories() {
   const { repo } = useParams();

@@ -118,7 +118,3 @@ export const IssuesList = styled.ul`
     }
   }
 `;
-
-export const List = styled(Link)`
-  
-`;

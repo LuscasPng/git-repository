@@ -25,7 +25,7 @@ export const Container = styled.div`
   p {
     margin-top: 5px;
     font-size: 14px;
-    text-align: center;
+    /* text-align: center; */
     line-height: 1.4;
     max-width: 400px;
   }
@@ -48,4 +48,77 @@ export const BackButton = styled(Link)`
   border: 0;
   outline: 0;
   background: transparent;
+`;
+
+export const IssuesList = styled.ul`
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #2a2a2a;
+  list-style: none;
+
+  li {
+    display: flex;
+    padding: 15px 0;
+    
+    & + li {
+      margin-top: 15px;
+    }
+
+    img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid #2a2a2a;
+    }
+
+    div {
+      flex: 1;
+      margin-left: 12px;
+
+      p {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+    }
+
+    strong {
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      
+      a {
+        text-decoration: none;
+        color: #bdbdbd;
+      }
+
+      a:hover {
+        color: #2a2a2a;
+        transition: 0.2s;
+      }
+      div {
+        margin: 0;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+
+      span {
+        background-color: #bdbdbd;
+        color: #2a2a2a;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 4px 7px;
+        margin-top: 6px;
+        width: max-content;
+
+        & + span {
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+`;
+
+export const List = styled(Link)`
+  
 `;

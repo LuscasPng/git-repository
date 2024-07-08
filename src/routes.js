@@ -1,7 +1,7 @@
-import React from "react";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
-import Main from "./pages/Main";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Repositories from "./pages/Repositories";
+import Main from "./pages/Main";
+import React from "react";
 
 export default function AppRoutes() {
   return(

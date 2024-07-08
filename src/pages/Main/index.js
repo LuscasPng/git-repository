@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect } from "react";
 import { Container, Form, SubmitButton, List, DeleteButton, Icons, Head } from "./styles";
 import { FaBars, FaGithub, FaPlus, FaSpinner, FaTrash } from "react-icons/fa";
-import api from "../../services/api";
+import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
+import api from "../../services/api";
 
 function Main() {
   const [newRepositorie, setNewRepositorie] = useState("");
